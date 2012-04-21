@@ -36,7 +36,7 @@ echo final.log.result finished #输出一行字，表示最终统计结束
 ```bash
 awk '$9 == 200 && $7 ~ /^\/blog\/2011\// { count[$7]++ } END { for (k in count) print k,count[k] }' | sort -rnk 2 < cat www-*.log
 ```
-* `$9 == "200" && $7 ~/\/blog\/2011\//`表示第9列值为200且第7列包含匹配`\/blog\/2011\/`的子串时才执行。即只处理成功访问的2011年的日志。
+* `$9 == "200" && $7 ~/\/blog\/2011\//`表示第9列值为200且第7列包含匹配`^/blog/2011/`的子串时才执行。即只处理成功访问的2011年的日志。
 * `count[$7]++`表示count是一个字典，第七列作为key的值加1。
 * `for (k in count) print k, count[k]`最后把count的KV对打印出来。
 * `sort -rnk 2`将打印结果送给sort进行排序，按照第二列`k 2`，作为数字`n`，倒序`r`排列。
