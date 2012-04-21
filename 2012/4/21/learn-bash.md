@@ -2,6 +2,8 @@
 
 ## 文本处理任务
 
+### 统计最受欢迎的文章
+
 来自 [《处理Apache日志的Bash脚本》](http://www.ruanyifeng.com/blog/2012/01/a_bash_script_of_apache_log_analysis.html) -- 阮一峰
 
 日志格式:  
@@ -42,6 +44,31 @@ awk '$9 == 200 && $7 ~ /^\/blog\/2011\// { count[$7]++ } END { for (k in count) 
 * `sort -rnk 2`将打印结果送给sort进行排序，按照第二列`k 2`，作为数字`n`，倒序`r`排列。
 * `cat www-*.log`将合并www-*.log多个文件送到标准输出。
 * `<`将`cat`的stdout重定向到`awk`的stdin。类似的有`>`，左边的stdout重定向到右边的stdin。
+
+### 配置项变更
+
+找出新增的、修改的配置项。
+
+配置项格式
+```txt
+key = value
+```
+```txt
+# 老配置
+log4j.rootLogger         = INFO, A1
+log4j.appender.A1        = org.apache.log4j.ConsoleAppender
+log4j.appender.A1.layout = org.apache.log4j.PatternLayout
+　　
+log4j.appender.A1.layout.ConversionPattern = %-4r %-5p [%t] %37c %3x - %m%n
+
+# 新配置
+log4j.rootLogger         = DEBUG, A1
+log4j.appender.A1        = org.apache.log4j.ConsoleAppender
+log4j.appender.A1.layout = org.apache.log4j.PatternLayout
+　　
+log4j.appender.A1.layout.ConversionPattern = %-4r %-5p [%t] %37c %3x - %m%n
+log4j.appender.stdout = org.apache.log4j.ConsoleAppender
+```
 
 ## Bash基本语法与内建命令
 
