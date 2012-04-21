@@ -24,7 +24,7 @@ touch log.result #创建一个空文件
 for i in www-*.log #遍历当前目录中所有log文件
 do 
 　　echo $i ... #输出一行字，表示开始处理当前文件
-　　awk '$9 == 200 {print $7}' $i|grep -i '^/blog/2011/.*\.html$'|sort|uniq -c|sed 's/^ *//g' > $i.result #生成当前日志的处理结果
+　　awk '$9 == "200" {print $7}' $i|grep -i '^/blog/2011/.*\.html$'|sort|uniq -c|sed 's/^ *//g' > $i.result #生成当前日志的处理结果
 　　cat $i.result >> log.result #将处理结果追加到log.result文件
 　　echo $i.result finished #输出一行字，表示结束处理当前文件
 done
