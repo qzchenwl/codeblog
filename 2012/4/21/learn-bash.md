@@ -35,6 +35,21 @@ done
 echo final.log.result ... #输出一行字，表示最终统计开始
 sort -k2 log.result | uniq -f1 --all-repeated=separate |./log.awk |sort -rn > final.log.result #生成最终的结果文件final.log.result
 echo final.log.result finished #输出一行字，表示最终统计结束
+
+# log.awk
+#!/usr/bin/awk -f
+BEGIN {
+    RS="" #将多行记录的分隔符定为一个空行
+}
+{
+    sum=0 #定义一个表示总和的变量，初值为0
+    for(i=1;i<=NF;i++){ #遍历所有字段
+        if((i%2)!=0){ #判断是否为奇数字段
+            sum += $i #如果是的话，累加这些字段的值
+        }
+    }
+    print sum,$2 #输出总和，后面跟上对应的网址 
+}
 ```
 改进后的脚本
 ```bash
