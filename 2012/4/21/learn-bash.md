@@ -38,12 +38,12 @@ echo final.log.result finished #输出一行字，表示最终统计结束
 ```bash
 awk '$9 == 200 && $7 ~ /^\/blog\/2011\// { count[$7]++ } END { for (k in count) print k,count[k] }' | sort -rnk 2 < cat www-*.log
 ```
-* `$9 == "200" && $7 ~/\/blog\/2011\//`表示第9列值为200且第7列包含匹配`^/blog/2011/`的子串时才执行。即只处理成功访问的2011年的日志。
-* `count[$7]++`表示count是一个字典，第七列作为key的值加1。
-* `for (k in count) print k, count[k]`最后把count的KV对打印出来。
-* `sort -rnk 2`将打印结果送给sort进行排序，按照第二列`k 2`，作为数字`n`，倒序`r`排列。
-* `cat www-*.log`将合并www-*.log多个文件送到标准输出。
-* `<`将`cat`的stdout重定向到`awk`的stdin。类似的有`>`，左边的stdout重定向到右边的stdin。
+1. `$9 == "200" && $7 ~/\/blog\/2011\//`表示第9列值为200且第7列包含匹配`^/blog/2011/`的子串时才执行。即只处理成功访问的2011年的日志。
+2. `count[$7]++`表示count是一个字典，第七列作为key的值加1。
+3. `for (k in count) print k, count[k]`最后把count的KV对打印出来。
+4. `sort -rnk 2`将打印结果送给sort进行排序，按照第二列`k 2`，作为数字`n`，倒序`r`排列。
+5. `cat www-*.log`将合并www-*.log多个文件送到标准输出。
+6. `<`将`cat`的stdout重定向到`awk`的stdin。类似的有`>`，左边的stdout重定向到右边的stdin。
 
 ### 配置项变更
 
@@ -63,12 +63,22 @@ log4j.appender.A1.layout.ConversionPattern = %-4r %-5p [%t] %37c %3x - %m%n
 
 # 新配置
 log4j.rootLogger         = DEBUG, A1
-log4j.appender.A1        = org.apache.log4j.ConsoleAppender
 log4j.appender.A1.layout = org.apache.log4j.PatternLayout
-　　
+log4j.appender.A1 = org.apache.log4j.ConsoleAppender
+
 log4j.appender.A1.layout.ConversionPattern = %-4r %-5p [%t] %37c %3x - %m%n
 log4j.appender.stdout = org.apache.log4j.ConsoleAppender
 ```
+```bash
+vimdiff <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\s*$' newfile | sed 's/\s*=\s*/ = /g' | sort)
+comm -13 <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\s*$' newfile | sed 's/\s*=\s*/ = /g' | sort)
+```
+1. `grep -v '^\s*$'`去除文件中的空行（除了空白字符什么都没有的行）。
+2. `sed 's/\s*=\s*/ = /g'，等号左右统一成一个空格。
+3. `sort`，排序
+4. `<(cmd)`将标准输出作为文件内容，返回文件名。
+5. `vimdiff file1 file2`用vim查看`diff file1 file2`的结果
+6. `comm -13 file1 file2`按行比较file1，file2的内容，仅显示file2独有的行。
 
 ## Bash基本语法与内建命令
 
