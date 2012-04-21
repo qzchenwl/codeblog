@@ -35,8 +35,8 @@ done
 echo final.log.result ... #输出一行字，表示最终统计开始
 sort -k2 log.result | uniq -f1 --all-repeated=separate |./log.awk |sort -rn > final.log.result #生成最终的结果文件final.log.result
 echo final.log.result finished #输出一行字，表示最终统计结束
-
-# log.awk
+```
+```awk
 #!/usr/bin/awk -f
 BEGIN {
     RS="" #将多行记录的分隔符定为一个空行
