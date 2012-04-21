@@ -70,6 +70,7 @@ awk '$9 == 200 && $7 ~ /^\/blog\/2011\// { count[$7]++ } END { for (k in count) 
 ```txt
 key = value
 ```
+新老配置项
 ```txt
 # 老配置
 log4j.rootLogger         = INFO, A1
@@ -86,6 +87,7 @@ log4j.appender.A1 = org.apache.log4j.ConsoleAppender
 log4j.appender.A1.layout.ConversionPattern = %-4r %-5p [%t] %37c %3x - %m%n
 log4j.appender.stdout = org.apache.log4j.ConsoleAppender
 ```
+脚本
 ```bash
 vimdiff <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\s*$' newfile | sed 's/\s*=\s*/ = /g' | sort)
 comm -13 <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\s*$' newfile | sed 's/\s*=\s*/ = /g' | sort)
