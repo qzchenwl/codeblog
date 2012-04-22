@@ -59,18 +59,18 @@ awk '$9 == 200 && $7 ~ /^\/blog\/2011\// { count[$7]++ } END { for (k in count) 
 2. `count[$7]++`表示count是一个字典，第七列作为key的值加1。
 3. `for (k in count) print k, count[k]`最后把count的KV对打印出来。
 4. `sort -rnk 2`将打印结果送给sort进行排序，按照第二列`k 2`，作为数字`n`，倒序`r`排列。
-5. `cat www-*.log`将合并www-*.log多个文件送到标准输出。
+5. `cat www-*.log`将合并www-\*.log多个文件送到标准输出。
 6. `<`将`cat`的stdout重定向到`awk`的stdin。类似的有`>`，左边的stdout重定向到右边的stdin。
 
 ### 配置项变更
 
 找出新增的、修改的配置项。
 
-配置项格式
+配置项格式：
 ```txt
 key = value
 ```
-新老配置项
+新老配置项：
 ```txt
 # 老配置
 log4j.rootLogger         = INFO, A1
@@ -87,7 +87,7 @@ log4j.appender.A1 = org.apache.log4j.ConsoleAppender
 log4j.appender.A1.layout.ConversionPattern = %-4r %-5p [%t] %37c %3x - %m%n
 log4j.appender.stdout = org.apache.log4j.ConsoleAppender
 ```
-脚本
+脚本：
 ```bash
 vimdiff <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\s*$' newfile | sed 's/\s*=\s*/ = /g' | sort)
 comm -13 <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\s*$' newfile | sed 's/\s*=\s*/ = /g' | sort)
@@ -99,7 +99,88 @@ comm -13 <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\
 5. `vimdiff file1 file2`用vim查看file1，file2不同。
 6. `comm -13 file1 file2`按行比较file1，file2的内容，仅显示file2独有的行。
 
-## Bash基本语法与内建命令
+## Bash基本语法
+
+### 胶水
+
+```
+输出形式    输入形式    胶水           备注与示例
+标准输出    标准输入    管道           `grep foo file.txt | grep bar`
+标准输出    文件        进程替换       `diff <(sort file1.txt) <(sort file2.txt)`
+标准输出    参数        管道+xargs     `find /usr/bin | xargs file`
+文件        标准输入    重定向         `ssh me@myhost.com 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub`
+字符串      标准输入    here string    `base64 -d <<< NzU5Mzg1ODc=`
+```
+
+### 变量
+
+```bash
+bash$ variable1=23
+bash$ echo variable1
+variable1
+bash$ echo $variable1
+23
+bash$ [ -z "$unassigned" ] && echo "\$unassigned is NULL."
+unassigned is NULL.
+bash$ let "unassigned += 5"
+bash$ [ -z "$unassigned" ] && echo "\$unassigned is NULL."
+bash$ echo $unassigned
+5
+bash$ files=`ls`
+bash$ content=$(cat file.txt)
+bash$ a=100
+bash$ let "a += 1"
+bash$ echo $a
+101
+bash$ b=${a/01/22}
+bash$ echo "b = $b"
+b = 122
+bash$ array=(0 1 2 3 [10]=10 [11]=11)
+bash$ echo ${a[2]}
+2
+bash$ echo ${a[7]}
+
+bash$ echo ${a[10]}
+10
+bash$ echo ${a[@]}
+0 1 2 3 10 11
+bash$ echo ${#a[@]}
+6
+bash$ filename=abc.abc.mp3.mp3
+bash$ echo ${filename#a*c}
+.abc.mp3.mp3
+bash$ echo ${filename##a**c}
+.mp3.mp3
+bash$ echo ${filename%m*3}
+abc.abc.mp3.
+bash$ echo ${filename%%m*3}
+abc.abc.
+bash$ echo $PWD
+/home/admin/test
+bash$ echo $HOME
+/home/admin
+```
+
+### 命令替换
+
+命令替换有两种形式：  
+1. \`...\`，简单形式，不支持嵌套
+2. $(...)，支持嵌套
+
+### 循环和分支
+
+1. `for arg in [ list ] ; do command(s)...; done`
+2. `while [ condition ] ; do command(s)...; done`
+3. `until [ condition ] ; do command(s)...; done`
+4. `case (in) / esac`
+5. `if [ condition ] ; then command(s)...; else command(s)...; fi`
+
+### 代数运算
+
+1. `z=\`expr $z + 3\``
+2. `z=$((z+3))`
+3. `let z=z+3`
+4. `let "z += 3"`
 
 ## 外部命令组合
 
