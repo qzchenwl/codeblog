@@ -105,11 +105,11 @@ comm -13 <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\
 
 ```
 输出形式    输入形式    胶水           备注与示例
-标准输出    标准输入    管道           `grep foo file.txt | grep bar`
-标准输出    文件        进程替换       `diff <(sort file1.txt) <(sort file2.txt)`
-标准输出    参数        管道+xargs     `find /usr/bin | xargs file`
-文件        标准输入    重定向         `ssh me@myhost.com 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub`
-字符串      标准输入    here string    `base64 -d <<< NzU5Mzg1ODc=`
+标准输出    标准输入    管道           grep foo file.txt | grep bar
+标准输出    文件        进程替换       diff <(sort file1.txt) <(sort file2.txt)
+标准输出    参数        管道+xargs     find /usr/bin | xargs file
+文件        标准输入    重定向         ssh me@myhost.com 'cat >> ~/.ssh/authorized_keys' < ~/.ssh/id_rsa.pub
+字符串      标准输入    here string    base64 -d <<< NzU5Mzg1ODc=
 ```
 
 ### 变量
