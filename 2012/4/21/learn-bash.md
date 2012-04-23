@@ -177,11 +177,63 @@ bash$ echo $HOME
 
 ### 代数运算
 
-1. ```z=`expr $z + 3` ```
+1. ``z=`expr $z + 3` ``
 2. `z=$((z+3))`
 3. `let z=z+3`
 4. `let "z += 3"`
 
-## 外部命令组合
+### 命令
 
-## vim,awk,sed,sort,uniq...小抄
+Bash + 命令 = 如虎添翼。
+
+#### netcat
+
+netcat号称TCP/IP瑞士军刀，通常用来测试网络以及错误排查。
+
+##### 基本用法：
+
+1. 查看帮助
+$ nc -h
+2. 连接远程主机
+$ nc www.baidu.com 80
+GET / HTTP/1.1
+Host: www.baidu.com
+
+3. 监听端口
+$ nc -l -p 80
+
+4. 扫描远程主机端口
+$ nc -nvv -w2 -z 192.168.x.x 80-445
+
+5. 为Shell开后门
+$ nc -l -p 8787 /bin/bash
+
+##### 高级用法：
+
+1. 用作攻击
+$ cat exploit.txt | nc 192.168.x.x 80
+
+2. 用作蜜罐
+$ cat honeypot.txt | nc -L -p 80 >> log.txt
+
+#### awk
+
+文本处理语言，面向记录（record）和域（field）。
+
+RS
+
+#### sed
+
+#### vim
+
+## 附录: sed, awk, vim快速参考
+
+### sed单行脚本快速参考 [1]
+
+### 如何在Bash脚本中使用awk [2]
+
+### 七个高效的文本编辑习惯 [3]
+
+  [1]: http://sed.sourceforge.net/sed1line_zh-CN.html
+  [2]: http://www.cyberciti.biz/faq/bash-scripting-using-awk/
+  [3]: http://www.moolenaar.net/habits.html
