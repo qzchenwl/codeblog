@@ -193,28 +193,43 @@ netcat号称TCP/IP瑞士军刀，通常用来测试网络以及错误排查。
 ##### 基本用法：
 
 1. 查看帮助
+```
 $ nc -h
+```
+
 2. 连接远程主机
+```
 $ nc www.baidu.com 80
 GET / HTTP/1.1
 Host: www.baidu.com
+```
 
 3. 监听端口
+```
 $ nc -l -p 80
+```
 
 4. 扫描远程主机端口
+```
 $ nc -nvv -w2 -z 192.168.x.x 80-445
+```
 
 5. 为Shell开后门
+```
 $ nc -l -p 8787 /bin/bash
+```
 
 ##### 高级用法：
 
 1. 用作攻击
+```
 $ cat exploit.txt | nc 192.168.x.x 80
+```
 
 2. 用作蜜罐
+```
 $ cat honeypot.txt | nc -L -p 80 >> log.txt
+```
 
 #### awk
 
