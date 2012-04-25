@@ -303,13 +303,20 @@ awk模式可以是以下任一种：
 awk的数组是关联数组，下标为字符串。
 
 普通数组：  
-`ary["apple"] = 10; ary["orange"] = 11;`
-
+```awk
+ary["apple"] = 10;
+ary["orange"] = 11;
+```
 文艺数组：
-`ary["fruit"]["apple"] = 10; ary["fruit"]["orange"] = 11; ary["foo"]["bar"] = "foobar";`
-
+```awk
+ary["fruit"]["apple"] = 10;
+ary["fruit"]["orange"] = 11;
+ary["foo"]["bar"] = "foobar";
+```
 二逼数组:
-`ary["fruit", "apple"] = 10;`
+```awk
+ary["fruit", "apple"] = 10;
+```
 
 #### sed
 
