@@ -94,7 +94,7 @@ comm -13 <(grep -v '^\s*$' oldfile | sed 's/\s*=\s*/ = /g' | sort) <(grep -v '^\
 ```
 1. `grep -v '^\s*$'`去除文件中的空行（除了空白字符什么都没有的行）。
 2. `sed 's/\s*=\s*/ = /g'`，等号左右统一成一个空格。
-3. `sort`，排序
+3. `sort`，排序。
 4. `<(cmd)`将cmd的stdout作为文件内容，返回文件名。
 5. `vimdiff file1 file2`用vim查看file1，file2不同。
 6. `comm -13 file1 file2`按行比较file1，file2的内容，仅显示file2独有的行。
@@ -183,8 +183,6 @@ bash$ echo $HOME
 4. `let "z += 3"`
 
 ### 命令
-
-Bash + 命令 = 如虎添翼。
 
 #### netcat
 
