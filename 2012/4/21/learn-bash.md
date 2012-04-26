@@ -321,12 +321,14 @@ sed是非交互式的行编辑器。他从stdin或文件中接受文本输入，
 
 ##### 基本sed操作
 
+```
 操作符                          效果
 [地址范围]/p                    打印指定范围。
 [地址范围]/d                    删除指定范围。
 s/pattern1/pattern2             替换pattern1为pattern2。
 [地址范围]/s/pattern1/pattern2/ 在指定范围里替换pattern1为pattern2。
 [地址范围]/y/pattern1/pattern2/ 在指定范围里将pattern1中的每个字符替换为pattern2中相应位置的字符，等价于`tr`命令。
+```
 
 ###### 示例
 
