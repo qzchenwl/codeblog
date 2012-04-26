@@ -53,7 +53,7 @@ BEGIN {
 ```
 改进后的脚本
 ```bash
-awk '$9 == 200 && $7 ~ /^\/blog\/2011\// { count[$7]++ } END { for (k in count) print k,count[k] }' | sort -rnk 2 < cat www-*.log
+cat www-*.log | awk '$9 == 200 && $7 ~ /^\/blog\/2011\// { count[$7]++ } END { for (k in count) print k,count[k] }' | sort -rnk 2
 ```
 1. `$9 == "200" && $7 ~/\/blog\/2011\//`表示第9列值为200且第7列包含匹配`^/blog/2011/`的子串时才执行。即只处理成功访问的2011年的日志。
 2. `count[$7]++`表示count是一个字典，第七列作为key的值加1。
