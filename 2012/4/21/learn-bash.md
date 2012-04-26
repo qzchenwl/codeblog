@@ -333,7 +333,7 @@ s/pattern1/pattern2             替换pattern1为pattern2。
 ###### 示例
 
 **将空格替换为换行**  
-`sed 's/ /\n/g'
+`sed 's/ /\n/g'`
 
 **删除开头10行**
 `sed '1,10d'`
