@@ -335,10 +335,10 @@ s/pattern1/pattern2             替换pattern1为pattern2。
 **将空格替换为换行**  
 `sed 's/ /\n/g'`
 
-**删除开头10行**
+**删除开头10行**  
 `sed '1,10d'`
 
-**URL解码**
+**URL解码**  
 `echo -e $(sed 's/+/ /g; s/%/\\x/g')`
 
 #### vim
