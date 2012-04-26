@@ -60,7 +60,6 @@ cat www-*.log | awk '$9 == 200 && $7 ~ /^\/blog\/2011\// { count[$7]++ } END { f
 3. `for (k in count) print k, count[k]`最后把count的KV对打印出来。
 4. `sort -rnk 2`将打印结果送给sort进行排序，按照第二列`k 2`，作为数字`n`，倒序`r`排列。
 5. `cat www-*.log`将合并www-\*.log多个文件送到标准输出。
-6. `<`将`cat`的stdout重定向到`awk`的stdin。类似的有`>`，左边的stdout重定向到右边的stdin。
 
 ### 配置项变更
 
