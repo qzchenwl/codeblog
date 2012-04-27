@@ -370,12 +370,15 @@ s/pattern1/pattern2             替换pattern1为pattern2。
 
 ## 附录: sed, awk, vim快速参考
 
-### sed单行脚本快速参考 [1]
+### [sed单行脚本快速参考] [1]
 
-### 如何在Bash脚本中使用awk [2]
+### [如何在Bash脚本中使用awk] [2]
 
-### 七个高效的文本编辑习惯 [3]
+### [七个高效的文本编辑习惯] [3]
+
+### [Advanced Bash-Scripting Guide] [4]
 
   [1]: http://sed.sourceforge.net/sed1line_zh-CN.html
   [2]: http://www.cyberciti.biz/faq/bash-scripting-using-awk/
   [3]: http://www.moolenaar.net/habits.html
+  [4]: http://tldp.org/LDP/abs/html/
